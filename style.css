@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Pacifico&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Nunito;
+    scroll-behavior: smooth;
+}
+:root{
+    --primary-color:#716F81;
+    --secondary-color:#B97A95;
+    --ternary-color:#ffa488;
+    --fourth-color:#CCF2F4;
+    --background-color:#F2E1C1;
+}
+body{
+    background: var(--background-color);
+    padding: 30px;
+}
+.container{
+    max-width: 1500px;
+    margin: auto;
+}
+img{
+    max-width: 100%;
+    border-radius: 6px;
+}
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+h1{
+    font-size: 2.6rem;
+    margin-bottom: 15px;
+}
+#special{
+    color: var(--ternary-color);
+    font-family: Pacifico;
+    text-shadow: -1px -1px var(--primary-color);
+}
+#main{
+    height: max-content;
+    background: var(--primary-color);
+    border-radius: 6px;
+}
+header{
+    border-bottom: 3px solid var(--ternary-color);
+    padding: 20px;
+    background: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+header a{
+    padding:15px;
+    color:var(--ternary-color);  
+}
+header a:hover{
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    border-radius: 40px;
+}
+#overview{
+    display: grid;
+    grid-template-columns: 0.6fr 1fr;
+    margin: 10px;
+    padding: 30px 0;
+}
+#overview >div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color:whitesmoke;
+    padding: 10px 20px;
+}
+#input_data{
+    height: 100vh;
+}
+#smooth_scroller{
+    cursor: pointer;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 30px;
+    font-weight: 700;
+    color:var(--ternary-color);
+    font-size: 1rem;
+    text-shadow: -1px -1px var(--primary-color);
+
+}

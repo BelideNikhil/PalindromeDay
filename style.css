@@ -15,7 +15,7 @@
 }
 body{
     background: var(--background-color);
-    padding: 30px;
+    padding-top: 25px;
 }
 .container{
     max-width: 1500px;
@@ -29,9 +29,19 @@ a{
     text-decoration: none;
     cursor: pointer;
 }
+h1,h2,h3,h4,h5,h6{
+    margin-bottom: 1rem;
+}
 h1{
     font-size: 2.6rem;
-    margin-bottom: 15px;
+}
+p{
+    font-size: 1.1rem;
+}
+#gif{
+    width: 420px;
+    margin-top: 35px;
+    display: none;
 }
 #special{
     color: var(--ternary-color);
@@ -50,17 +60,20 @@ header{
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    text-align: center;
 }
 header a{
-    padding:15px;
+    padding: 10px;
+    margin: 10px 20px;
     color:var(--ternary-color);  
 }
 header a:hover{
     transform: scale(1.1);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-    border-radius: 40px;
+    border-radius: 50%;
 }
 #overview{
+    height: 100vh;
     display: grid;
     grid-template-columns: 0.6fr 1fr;
     margin: 10px;
@@ -75,9 +88,6 @@ header a:hover{
     color:whitesmoke;
     padding: 10px 20px;
 }
-#input_data{
-    height: 100vh;
-}
 #smooth_scroller{
     cursor: pointer;
     padding: 15px 30px;
@@ -88,5 +98,76 @@ header a:hover{
     color:var(--ternary-color);
     font-size: 1rem;
     text-shadow: -1px -1px var(--primary-color);
+    background: var(--background-color);
+}
+#input_data{
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+#input_data input{
+    border: 3px solid var(--primary-color);
+    border-radius: 6px;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+#btn{
+    cursor: pointer;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 30px;
+    font-weight: 700;
+    color:whitesmoke;
+    font-size: 1rem;
+    text-shadow: -1px -1px var(--primary-color);
+    background:var(--secondary-color);
+}
 
+#output{
+    display: none;
+    margin-top: 70px;
+    border-radius: 6px;
+    padding: 20px 40px;
+    font-weight: 600;
+    font-size: 1.4rem;
+    background: var(--primary-color);
+    color: whitesmoke;
+    text-shadow: -1px -1px var(--ternary-color);
+}
+footer{
+    width: 100%;
+    text-align: center;
+    background: var(--primary-color);
+    padding: 15px 0;
+}
+#social{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#social>div{
+    padding: 10px 15px;
+}
+footer a{
+    color: var(--ternary-color);
+}
+
+/* mobile */
+@media screen and (max-width:400px){
+    header{
+        justify-content: center;
+    }
+    #overview{
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 15px 0;
+    }
+    h1{
+        font-size: 1.8rem;
+    }
 }

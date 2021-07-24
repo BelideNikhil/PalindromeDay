@@ -1,14 +1,25 @@
 
 const result=document.querySelector("#btn");
 let userDate=document.querySelector("#user_birthday")
-const daysInAMonth=[31,28,31,30,31,30,31,31,30,31,30,31]
+const daysInAMonth=[31,Number(`${new Date().getFullYear() % 4 ? 29 : 28}`),31,30,31,30,31,31,30,31,30,31];
+
+const output=document.querySelector("#output");
+const loading_gif=document.querySelector("#gif");
+
 
 result.addEventListener("click",()=>{
+    output.style.display='block'
     if(userDate.value===''){
-        console.log("please enter")
+        output.innerHTML="Please provide a date to find out."
     }
     else{
-        inputDatehandler()
+        output.style.display='none'
+        loading_gif.style.display='block'
+        setTimeout(()=>{
+            output.style.display='block'
+            loading_gif.style.display='none'
+            inputDatehandler()
+        },3500)
     }
 })
 
@@ -21,107 +32,108 @@ function inputDatehandler(){
     const inputYear=dateArray[0]
     let returnedValue= checkFormats(inputDay,inputMonth,inputYear)
     if(returnedValue){
-        console.log(`yay, ${returnedValue}`)
+        output.innerHTML=`Whoa!!! Your birthdate in format ${returnedValue} is palindrome.`
+
     }else{
-        let nearestPali=nextPalindrome(inputDay,inputMonth,inputYear)
-        console.log(`nearest pali is ${nearestPali}`)
+        let newData=nextPalindrome(inputDay,inputMonth,inputYear)
+        let nearestPal=newData[0]
+        let daysAway=newData[1]
+        output.innerHTML=`Awww! Your birthdate is not palindrome. Nearest palindrome date is ${nearestPal} You missed it by ${daysAway} days.`
     }
 }
 
 // changes formats 
 function checkFormats(dd,mm,yyyy){
-    const formatOne=dd+mm+yyyy
-    const formatTwo=mm+dd+yyyy
-    const formatThree=dd+mm+(yyyy.substring(2))
+    let dateStr=dd.toString()
+    let monthStr=mm.toString()
+    let yearStr=yyyy.toString()
+    if(dateStr.length===1){
+        dateStr="0"+dateStr
+    }
+    if(monthStr.length===1){
+        monthStr="0"+monthStr
+    }
 
-    if(isPalindrome(formatOne)){
-        return (`${dd}-${mm}-${yyyy}`)
-    }else if(isPalindrome(formatTwo)){
-        return (`${mm}-${dd}-${yyyy}`)
-    }else if(isPalindrome(formatThree)){
-        return `${dd}-${mm}-${yyyy.substring(2)}`
-    }else{
+    const formatOne= dateStr+monthStr+yearStr
+    const formatTwo=monthStr+dateStr+yearStr
+    const formatThree=yearStr+monthStr+dateStr
+
+    if (isPalindrome(formatOne)){
+        return (`${dateStr}-${monthStr}-${yearStr}`)
+    }
+    else if(isPalindrome(formatTwo)){
+        return (`${monthStr}-${dateStr}-${yearStr}`);
+    }
+    else if(isPalindrome(formatThree)){
+        return (`${yearStr}-${monthStr}-${dateStr}`);
+    }
+    else{
         return null
     }
 }
+
 // checks if given date is palindrome or not.
 function isPalindrome(dateString){
-    const reverseString=dateString.split('').reverse().join('')
-    if(dateString!=reverseString){
-        return false
-    }return true
+    const reverseString=dateString.toString().split('').reverse().join('')
+    if(dateString===reverseString){
+        return true
+    }
 }
 
 // gives us nearest pali when birthday is not pali
 function nextPalindrome(day,month,year){
-    let ddOne=Number(day)
-    let mmOne=Number(month)
-    let yyOne=Number(year)
+    
+    let futuredDate = Number(day);
+    let futreMonth = Number(month);
+    let futureYear = Number(year);
 
-    let ddTwo=Number(day)
-    let mmTwo=Number(month)
-    let yyTwo=Number(year)
+    let pastDate = Number(day);
+    let pastMonth = Number(month);
+    let pastYear = Number(year);
 
-    for(let i=1;i>0;i++){
-        // B not palindrome so starting with next day
-        // future
-        ddOne=ddOne+1;
-        if(ddOne>Number(daysInAMonth[mmOne-1])){
-            ddOne=1;
-            mmOne=mmOne+1
-            if(mmOne>12){
-                mmOne=1;
-                yyOne = yyOne+1
-            }
-        }
-        let ddInString=ddOne.toString()
-        let mmInString=mmOne.toString()
-        let yyInString=yyOne.toString()
-        // apending 0 if date/month is in 0-9
-        if(ddInString.length==1){
-            ddInString="0"+ddInString
-        } 
-        if(mmInString.length==1){
-            mmInString="0"+mmInString
-        }
+    let missedDays = 0;
+    while (true) {
+        missedDays += 1;
+        futuredDate += 1;
+        pastDate -= 1;
 
-        let flagDate=checkFormats(ddInString,mmInString,yyInString)
-        if(flagDate){
-            return (`${flagDate}`)
-        }
-        // history
-
-        if(yyTwo>1){
-            ddTwo=ddTwo-1;
-            if(ddTwo<1){
-                mmTwo=mmTwo-1;
-                if(mmTwo<1){
-                    mmTwo=12;
-                    yyTwo=yyTwo-1;
-                    if(yyTwo<1){
-                        break;
-                    }
-                    ddTwo=daysInAMonth[mmTwo-1]
+        // running past and future date simultaneously and returning as soon as we find one
+        if (futuredDate > daysInAMonth[futreMonth - 1]) {
+            futuredDate = 1;
+            futreMonth += 1;
+            if (futreMonth > 12) {
+                futreMonth = 1;
+                futureYear += 1;
+                if(futureYear>9999){
+                    break
                 }
             }
-
-
-            let ddInString=ddTwo.toString()
-            let mmInString=mmTwo.toString()
-            let yyInString=yyTwo.toString()
-            if(ddInString.length==1){
-                ddInString="0"+ddInString
-            } 
-            if(mmInString.length==1){
-                mmInString="0"+mmInString
-            }
-
-            let flagDate=checkFormats(ddInString,mmInString,yyInString)
-            if(flagDate){
-                return (`${flagDate}`)
-            }
-
         }
-        
+
+        if (pastDate < 1) {
+            pastMonth -= 1;
+            if (pastMonth < 1) {
+                pastYear -= 1;
+                if(backwardYear < 1) {
+                    return ["", ""];
+                }else{
+                    pastMonth = 12;
+                    pastDate = daysInAMonth[pastMonth];
+                }
+            } else {
+            pastDate = daysInAMonth[pastMonth - 1];
+            }
+        }
+        console.log(pastDate,pastMonth,pastYear,"==",futuredDate,futreMonth,futureYear)
+        const nextPali=checkFormats(futuredDate,futreMonth,futureYear);
+        if (nextPali)
+            return [nextPali, missedDays];
+
+        const prevPali=checkFormats(pastDate,pastMonth,pastYear);
+        if (prevPali)
+            return [prevPali, missedDays];
     }
 }
+
+
+

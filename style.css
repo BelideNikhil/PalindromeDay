@@ -18,7 +18,7 @@ body{
     padding: 25px 50px 0 50px;
 }
 .container{
-    max-width: 1500px;
+    max-width: 1300px;
     margin: auto;
 }
 img{
@@ -33,13 +33,13 @@ h1,h2,h3,h4,h5,h6{
     margin-bottom: 1rem;
 }
 h1{
-    font-size: 2.6rem;
+    font-size: 2.2rem;
 }
 p{
     font-size: 1.1rem;
 }
 #gif{
-    width: 420px;
+    max-width: 400px;
     margin-top: 35px;
     display: none;
 }
@@ -173,6 +173,9 @@ footer a:hover{
     body{
         padding: 0 15px;
     }
+    h1,h2,h3,h4,h5,h6{
+        margin-bottom: 0.7rem;
+    }
     #main{
         margin-bottom: 200px;
     }
@@ -187,8 +190,21 @@ footer a:hover{
     h1{
         font-size: 1.6rem;
     }
-    
+    #gif{
+        max-width: 250px;
+        margin-top: 15px;
+    }
+    #output{
+        margin-top: 40px;
+        border-radius: 6px;
+        padding: 20px;
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
     footer{
         padding: 10px 0;
+    }
+    #social>div{
+        padding: 10px ;
     }
 }

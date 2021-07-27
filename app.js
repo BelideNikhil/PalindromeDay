@@ -109,31 +109,30 @@ function nextPalindrome(day,month,year){
                 }
             }
         }
-
+        
         if (pastDate < 1) {
             pastMonth -= 1;
             if (pastMonth < 1) {
                 pastYear -= 1;
-                if(backwardYear < 1) {
+                if(pastYear < 1) {
                     return ["", ""];
                 }else{
                     pastMonth = 12;
-                    pastDate = daysInAMonth[pastMonth];
+                    pastDate = daysInAMonth[pastMonth - 1];
                 }
             } else {
             pastDate = daysInAMonth[pastMonth - 1];
             }
         }
+    
         console.log(pastDate,pastMonth,pastYear,"==",futuredDate,futreMonth,futureYear)
+        // passing the day,month,year to check if pali and break using return statement if true
         const nextPali=checkFormats(futuredDate,futreMonth,futureYear);
         if (nextPali)
             return [nextPali, missedDays];
 
-        const prevPali=checkFormats(pastDate,pastMonth,pastYear);
+            const prevPali=checkFormats(pastDate,pastMonth,pastYear);
         if (prevPali)
             return [prevPali, missedDays];
     }
 }
-
-
-

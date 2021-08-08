@@ -97,7 +97,7 @@ function nextPalindrome(day,month,year){
         futuredDate += 1;
         pastDate -= 1;
 
-        // running past and future date simultaneously and returning as soon as we find one
+        // running past and future date one after another and breaking the loop if either one of them is true
         if (futuredDate > daysInAMonth[futreMonth - 1]) {
             futuredDate = 1;
             futreMonth += 1;
@@ -115,14 +115,12 @@ function nextPalindrome(day,month,year){
             if (pastMonth < 1) {
                 pastYear -= 1;
                 if(pastYear < 1) {
-                    return ["", ""];
+                    break
                 }else{
                     pastMonth = 12;
-                    pastDate = daysInAMonth[pastMonth - 1];
                 }
-            } else {
+            } 
             pastDate = daysInAMonth[pastMonth - 1];
-            }
         }
     
         console.log(pastDate,pastMonth,pastYear,"==",futuredDate,futreMonth,futureYear)
